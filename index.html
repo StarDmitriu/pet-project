@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Расчет ИМТ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Заголовок страницы -->
+    <h1>Расчет индекса массы тела</h1>
+
+    <!-- Форма для ввода данных -->
+    <form id="bmiForm">
+        <!-- Поле для ввода веса -->
+        <label class="wei" for="weight">Вес (в кг):</label><br>
+        <input type="number" id="weight" name="weight"><br>
+
+        <!-- Поле для ввода роста -->
+        <label class="hei" for="height">Рост (в см):</label><br>
+        <input type="number" id="height" name="height"><br>
+
+        <!-- Кнопка для отправки формы -->
+        <input id="btn" type="submit" value="Рассчитать ИМТ">
+    </form>
+
+    <!-- Место для вывода результата -->
+    <p id="result"></p>
+
+    <script>
+        // Добавляем обработчик события 'submit' для формы
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            // Отменяем стандартное действие формы
+            event.preventDefault();
+
+            // Получаем введенные пользователем данные
+            let weight = document.getElementById('weight').value;
+            let height = document.getElementById('height').value;
+
+            // Вычисляем ИМТ
+            let bmi = weight / ((height / 100) * (height / 100));
+
+            // Определяем уровень ИМТ
+            let level='';
+            if (bmi < 18.5) {
+                level = 'Недостаточный вес';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                level = 'Нормальный вес';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                level = 'Избыточный вес';
+            } else if (bmi >= 30){
+                level = 'Ожирение';
+            } else {
+                level = 'Введите данные'
+            }
+
+            // Выводим результат на страницу
+            document.getElementById('result').innerText = 'Ваш ИМТ: ' + bmi.toFixed(2) + ' уровень: ' + level;
+        });
+    </script>
+</body>
+</html>
